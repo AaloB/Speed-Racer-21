@@ -34,11 +34,11 @@ public class SpeedRacer : MonoBehaviour
 
     public Fuel carFuel = new Fuel(100);
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        // Show in Console the car model and engine type. Use the + sign to combine (concatenate) regular text with variable names
-        print("The racer model is " + carModel + ". It has a " + engineType + " engine.");
+        //print("The racer model is " + carModel + " by " + carMaker + ". It has a " + engineType + " engine.");
+        modelText.text = "The racer model is " + carModel + " by " + carMaker + ".\nIt has a " + engineType + " engine.";
 
         CheckWeight();
 

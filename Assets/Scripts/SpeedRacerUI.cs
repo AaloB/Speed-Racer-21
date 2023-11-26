@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Racer : MonoBehaviour
+public class SpeedRacerUI : MonoBehaviour
 {
     // Declare and initialise the car's information
     public string carMaker;
@@ -35,12 +36,17 @@ public class Racer : MonoBehaviour
     // Notice how the data type is the same name of the class the variable is going to hold in it
     public Fuel carFuel = new Fuel(100);
 
+    public TMP_Text carDescriptionTextUI;
+    public TMP_Text carAgeTextUI;
+    public TMP_Text carWeightTextUI;
+    public TMP_Text CheckCharacteristicsTextUI;
+    public TMP_Text carFuelLevelTextUI;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        // Show in Console the car model and engine type. Use the + sign to combine (concatenate) regular text with variable names
-        print("The racer model is " + carModel + " by " + carMaker + ". It has a " + engineType + " engine.");
+       carDescriptionTextUI.text = "The racer model is " + carModel + " by " + carMaker + ". It has a " + engineType + " engine.";
 
         // Check if the car weighs less than 1500 kg.
         // This is a function call to the function named 'CheckWeight', which is defined further below
@@ -51,25 +57,22 @@ public class Racer : MonoBehaviour
          */
         if (yearMade <= 2009)
         {
-            print("It was first introduced in " + yearMade);
-
-            // Call the 'CalculateAge' function, passing the 'yearMade' variable as the argument. Then, store the return result in 'carAge' variable.
+            carAgeTextUI.text = "It was first introduced in " + yearMade;    
             int carAge = CalculateAge(yearMade);
-
-            print("That makes it " + carAge + " years old.");
+            carAgeTextUI.text += " That makes it " + carAge + " years old.";
 
         }
         else
         {
-            print("It was introduced in the 2010's");
-            print("And its maximum acceleration is " + maxAcceleration + " m/s2");
+            carAgeTextUI.text = "It was introduced in the 2010's";
+            carAgeTextUI.text += " And its maximum acceleration is " + maxAcceleration + " m/s2";
         }
 
-        print(CheckCharacteristics());
+        CheckCharacteristicsTextUI.text = CheckCharacteristics();
     }
 
     // Use the Update function to continuously check for player input
-    public void Update()
+    void Update()
     {
         // If the player presses down the Spacebar button, adjust the car fuel level
         if (Input.GetKeyDown(KeyCode.Space))
@@ -83,7 +86,7 @@ public class Racer : MonoBehaviour
     public void ConsumeFuel()
     {
         // Subtract 10 from fuelLevel by re-assigning the variable a new value, which is its old value minus 10
-        carFuel.fuelLevel = carFuel.fuelLevel - 10;
+        carFuel.fuelLevel -= 10;
     }
 
     // Check the fuel level and report to console at certain fuel levels
@@ -92,33 +95,33 @@ public class Racer : MonoBehaviour
         switch (carFuel.fuelLevel)
         {
             case 70:
-                print("Fuel level is nearing two-thirds.");
+                carFuelLevelTextUI.text = "Fuel level is nearing two-thirds.";
                 break;
             case 50:
-                print("Fuel level is at half amount.");
+                carFuelLevelTextUI.text = "Fuel level is at half amount.";
                 break;
             case 10:
-                print("Warning! Fuel level is critically low.");
+                carFuelLevelTextUI.text = "Warning! Fuel level is critically low.";
                 break;
             default:
-                print("Nothing to report.");
+                carFuelLevelTextUI.text = "Nothing to report.";
                 break;
         }
     }
 
-    // This function checks if the car weight is less than 1500 kg or not, and prints a console message accordingly
-    public void CheckWeight()
+    void CheckWeight()
     {
         /* if the weight is less than 1500, do what is in the first block of curly braces
          * otherwise, do what is in the second block of curly braces (after the 'else' keyword)
          */
+
         if (carWeight < 1500)
         {
-            print("The " + carModel + " weighs less than 1500 kg.");
+            carWeightTextUI.text = "The " + carModel + " weighs less than 1500 kg.";
         }
         else
         {
-            print("The " + carModel + " weighs over 1500 kg.");
+            carWeightTextUI.text = "The " + carModel + " weighs over 1500 kg.";
         }
     }
 
